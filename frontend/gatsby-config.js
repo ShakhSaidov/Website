@@ -1,41 +1,55 @@
-require("dotenv").config({
-  path: `.env`,
-});
+/**
+ * Configure your Gatsby site with this file.
+ *
+ * See: https://www.gatsbyjs.org/docs/gatsby-config/
+ */
 
 module.exports = {
+  siteMetadata: {
+    title: "WebDev Portfolio",
+    description: "This is WebDev Portfolio Site",
+    author: "@webdev",
+    twitterUsername: "@john_smilga",
+    image: "/twitter-img.png",
+    siteUrl: "https://testing-strapi-gatsby-build.netlify.app",
+  },
   plugins: [
-    "gatsby-plugin-react-helmet",
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `assets`,
+        path: `${__dirname}/src/assets/`,
       },
     },
     {
-      resolve: "gatsby-source-strapi",
+      resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: process.env.API_URL || "http://localhost:1337",
-        collectionTypes: ["article", "category", "writer"],
-        singleTypes: [`homepage`, `global`],
-        queryLimit: 1000,
+        apiURL: `http://localhost:1337`,
+        queryLimit: 1000, // Default to 100
+        //   contentTypes : `jobs`, `projects`, `blogs`,
+        //   singleType : `about`
+        //  ONLY ADD TO ARRAY IF YOU HAVE DATA IN STRAPI !!!!
+        contentTypes: [`jobs`],
+        singleTypes: [],
       },
     },
-    "gatsby-plugin-image",
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: "gatsby-starter-default",
-        short_name: "starter",
-        start_url: "/",
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/favicon.png`,
-      },
-    },
-    "gatsby-plugin-offline",
+    // {
+    //   resolve: `gatsby-plugin-webfonts`,
+    //   options: {
+    //     fonts: {
+    //       google: [
+    //         {
+    //           family: "Roboto",
+    //           variants: ["400", "700"],
+    //         },
+    //         { family: "Open Sans" },
+    //       ],
+    //     },
+    //   },
+    // },
   ],
-};
+}

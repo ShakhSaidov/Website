@@ -1,38 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { StaticQuery, graphql } from "gatsby";
-import Nav from "./nav";
-import Seo from "./seo";
+import React, { Children } from "react"
+// import "../css/main.css"
+import Navbar from "./Navbar"
+import Sidebar from "./Sidebar"
+import Footer from "./Footer"
+const Layout = ({ children }) => {
+  return (
+    <>
+    <Navbar/>
+      {children}
+    </>
+  )
+}
 
-const Layout = ({ children, seo }) => (
-  <StaticQuery
-    query={graphql`
-      query {
-        strapiHomepage {
-          seo {
-            metaTitle
-            metaDescription
-            shareImage {
-              localFile {
-                publicURL
-              }
-            }
-          }
-        }
-      }
-    `}
-    render={(data) => (
-      <>
-        <Seo seo={seo} />
-        <Nav />
-        <main>{children}</main>
-      </>
-    )}
-  />
-);
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-export default Layout;
+export default Layout
