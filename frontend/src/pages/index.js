@@ -30,7 +30,7 @@ export const query = graphql`
         description
         title
         image {
-          ...GatsbyImageSharpFluid
+          url
         }
         stack {
           id
@@ -40,3 +40,4 @@ export const query = graphql`
     }
   }
 `
+// ...GatsbyImageSharpFluid
