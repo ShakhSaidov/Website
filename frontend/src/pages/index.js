@@ -6,9 +6,10 @@ import Services from "../components/Services"
 import Jobs from "../components/Jobs"
 import Projects from "../components/Projects"
 import Blogs from "../components/Blogs"
+
 export default ({ data }) => {
   const {
-    allStrapiProjects: { nodes: projects },
+    allStrapiBlogs: { nodes: blogs },
   } = data
 
   return (
@@ -16,28 +17,31 @@ export default ({ data }) => {
       <Hero />
       <Services />
       <Jobs />
-      <Projects projects={projects} title="featured projects" showLink/> 
+      <Blogs blogs={blogs} title="Latest Blogs" showLink/>
     </Layout>
   )
 }
 
 export const query = graphql`
   {
-    allStrapiProjects(filter: { featured: { eq: true } }) {
+    allStrapiBlogs(sort: {fields: date, order: DESC}, limit: 3) {
       nodes {
-        github
+        slug
+        content
+        desc
+        date(formatString: "MMMM Do, YYYY")
         id
-        description
         title
+        category
         image {
-          url
-        }
-        stack {
-          id
-          title
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
         }
       }
     }
   }
 `
-// ...GatsbyImageSharpFluid
+

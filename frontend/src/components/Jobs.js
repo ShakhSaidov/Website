@@ -53,16 +53,14 @@ const Jobs = () => {
           <h3>{position}</h3>
           <h4>{company}</h4>
           <p className="job-date">{date}</p>
-          {
-            desc.map((d) => {
-              return (
-                <div key={d.id} className="job-desc"> 
-                  <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
-                  <p>{d.name}</p>
-                </div>
-              )
-            })
-          }
+          {desc.map(d => {
+            return (
+              <div key={d.id} className="job-desc">
+                <FaAngleDoubleRight className="job-icon"></FaAngleDoubleRight>
+                <p>{d.name}</p>
+              </div>
+            )
+          })}
         </article>
       </div>
       <Link to="/about" className="btn center-btn">
